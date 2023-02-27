@@ -1,0 +1,48 @@
+import sys
+import time
+import random 
+
+import os
+import shutil
+import logging 
+
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+from_dir = "</Users/NithinsMacAir/Downloads>"
+
+class FileEventHandler(FileEventHandler)
+
+ def on_created(self, events): 
+    print("Hi, {event.src_path} has been created")
+
+ def on_modified(self, events):
+    print("Hello there, {event.src_path} has been modified")
+
+ def on_moved(self, events):
+    print("Someone moved {event.src_path} to {event.dest_path}")
+
+ def on_deleted(self, events):
+    print("Oh no! Someone removed {event.src_path}.")
+
+
+
+
+
+event_handler = FileEventHandler
+
+observer = Observer()
+
+observer.schedule(event_handler, from_dir)
+
+observer.start()
+
+
+
+try: 
+    while True:
+        time.sleep(2)
+        print("running...")
+except KeyboardInterrupt:
+    print("stopped!")
+    observer.stop()
